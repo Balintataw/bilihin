@@ -35,7 +35,7 @@ List<Map<String, Object>> groupedTransactionValues(AppState state) {
   }).reversed.toList();
 }
 
-double totalSpending(AppState state) {
+double totalWeekSpending(AppState state) {
   return groupedTransactionValues(state).fold(0.0, (previousValue, tx) {
     return previousValue += tx['amount'];
   });

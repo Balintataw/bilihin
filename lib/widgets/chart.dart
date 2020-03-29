@@ -13,7 +13,15 @@ class Chart extends StatelessWidget {
         return LayoutBuilder(builder: (ctx, constraints) {
           return Column(
             children: [ 
-              Text('This Week'),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  'Last 7 days: \$${totalWeekSpending(state).toStringAsFixed(2)}', 
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
               Card(
                 elevation: 5,
                 margin: EdgeInsets.all(8),
@@ -28,7 +36,7 @@ class Chart extends StatelessWidget {
                         child: ChartBar(
                           label: tx['day'], 
                           spendingAmount: tx['amount'], 
-                          spendingPercentage: totalSpending == 0.0 ? 0.0 : (tx['amount'] as double) / totalSpending(state)
+                          spendingPercentage: totalWeekSpending(state) == 0.0 ? 0.0 : (tx['amount'] as double) / totalWeekSpending(state)
                         )
                       );
                     }).toList()

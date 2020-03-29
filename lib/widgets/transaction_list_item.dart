@@ -51,7 +51,8 @@ class TransactionListItem extends StatelessWidget {
               transaction,
               (id) => store.dispatch(DeleteTransactionAction(id))
             );
-          }, builder: (context, viewModel) {
+          }, 
+          builder: (context, viewModel) {
             return IconButton(
               icon: Icon(
                 Icons.delete,

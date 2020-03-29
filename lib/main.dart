@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:expenseTracker/redux/actions/actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -15,55 +14,66 @@ void main() {
     initialState: AppState.initial(), 
     middleware: [thunkMiddleware]
   );
-  runApp(App(store: store));
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp, 
-    DeviceOrientation.portraitDown
-  ]);
+  runApp(
+    StoreProvider<AppState>(
+      store: store, 
+      child: App()
+    )
+  );
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp, 
+  //   DeviceOrientation.portraitDown
+  // ]);
 }
 
 class App extends StatelessWidget {
-  final Store<AppState> store;
+  // final Store<AppState> store;
 
-  App({this.store});
+  // App({this.store});
 
-  _onInit(context) {
-    var t = store.state.transactions;
-    print(t.toString());
-    return t;
-  }
+  // _onInit(context) {
+  //   var t = store.state.transactions;
+  //   print(t.toString());
+  //   return t;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return new StoreProvider<AppState>(
-      store: store,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Bilihin',
-        home: HomePage(store: store, onInit: () => _onInit(context)),
-        theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
-          accentColor: Colors.redAccent,
-          fontFamily: 'Quicksand',
-          textTheme: ThemeData.light().textTheme.copyWith(
-            headline6: TextStyle(
-              fontFamily: 'OpenSans',
-              fontWeight: FontWeight.bold,
-              fontSize: 16
-            ),
-            button: TextStyle(color: Colors.white)
-          ),
-          appBarTheme: AppBarTheme(
-            textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: TextStyle(
-                fontFamily: 'OpenSans',
-                fontWeight: FontWeight.bold,
-                fontSize: 20
+    return new StoreConnector<AppState, Store<AppState>>(
+      converter: (store) => store,
+      builder: (context, store) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Bilihin',
+          home: HomePage(store: store),
+          // home: HomePage(store: store, onInit: () => _onInit(context)),
+          theme: 
+          ThemeData(
+            primarySwatch: Colors.blueGrey,
+            accentColor: Colors.redAccent,
+            brightness: store.state.theme ? Brightness.dark : Brightness.light,
+            fontFamily: 'Quicksand',
+            textTheme: TextTheme().apply(fontFamily: 'OpenSans'),
+            // ThemeData. .textTheme.copyWith(
+            //   headline6: TextStyle(
+            //     fontFamily: 'OpenSans',
+            //     fontWeight: FontWeight.bold,
+            //     fontSize: 16
+            //   ),
+            //   button: TextStyle(color: Colors.white)
+            // ),
+            appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                headline6: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20
+                )
               )
             )
-          )
-        ),
-      )
+          ),
+        );
+      }
     );
   }
 }

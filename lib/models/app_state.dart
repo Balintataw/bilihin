@@ -5,14 +5,16 @@ import 'package:meta/meta.dart';
 class AppState {
   final bool isLoading;
   final List<Transaction> transactions;
+  final bool theme;
 
   AppState({
+    this.theme,
     this.isLoading,
     this.transactions,
   });
 
   factory AppState.initial() {
-    return AppState(isLoading: true, transactions: [
+    return AppState(isLoading: true, theme: false, transactions: [
       Transaction(
           id: '1', title: 'New Koshka', amount: 99.99, date: DateTime.now()),
       Transaction(
@@ -21,10 +23,12 @@ class AppState {
   }
 
   AppState copyWith({
+    String theme,
     bool isLoading,
     List<Transaction> transactions,
   }) {
     return AppState(
+      theme: theme ?? this.theme,
       isLoading: isLoading ?? this.isLoading,
       transactions: transactions ?? this.transactions,
     );
@@ -32,6 +36,7 @@ class AppState {
 
   @override
   int get hashCode =>
+    theme.hashCode ^
     isLoading.hashCode ^
     transactions.hashCode;
 
@@ -40,11 +45,12 @@ class AppState {
       identical(this, other) ||
       other is AppState &&
           runtimeType == other.runtimeType &&
+          theme == other.theme &&
           isLoading == other.isLoading &&
           transactions == other.transactions;
 
   @override
   String toString() {
-    return 'AppState{isLoading: $isLoading, transactions: $transactions}';
+    return 'AppState{theme: $theme, isLoading: $isLoading, transactions: $transactions}';
   }
 }

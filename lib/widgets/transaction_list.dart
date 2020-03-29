@@ -1,4 +1,3 @@
-import 'package:expenseTracker/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:expenseTracker/models/app_state.dart';
@@ -11,23 +10,27 @@ class TransactionList extends StatelessWidget {
       converter: (store) => store.state,
       builder: (context, state) {
         return state.transactions.isEmpty 
-        ? Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'No transactions Today',
-              style: Theme.of(context).textTheme.headline6
-            ),
-            SizedBox(height: 15),
-            Container(
-              height: 50,
-              child: Image.asset(
-                'assets/images/waiting.png',
-                fit: BoxFit.cover,
-              ),
-            )
-          ]
+        ? LayoutBuilder(
+          builder: (ctx, constraints) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'No transactions Today',
+                  style: Theme.of(context).textTheme.headline6
+                ),
+                SizedBox(height: 15),
+                Container(
+                  height: constraints.maxHeight * 0.4,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ]
+            );
+          }
         )
         : ListView.builder(
           itemCount: state.transactions.length,
