@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expenseTracker/widgets/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
@@ -42,30 +44,35 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    // final isIos = Platform.isIOS;
+    final appBar = AppBar(
+      title: Text('Bilihin'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.settings
+          ), 
+          onPressed: () => _showSettingsModal(context, widget.store))
+      ],
+      bottom: TabBar(
+        tabs: [
+          Tab(icon: Icon(Icons.home)),
+          Tab(icon: Icon(Icons.insert_chart)),
+        ],
+      ),
+    );
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Bilihin'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings
-              ), 
-              onPressed: () => _showSettingsModal(context, widget.store))
-          ],
-          bottom: TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.home)),
-              Tab(icon: Icon(Icons.insert_chart)),
+        appBar: appBar,
+        body: SafeArea(
+          child: TabBarView(
+            children: [
+              TransactionList(),
+              Chart(),
             ],
           ),
-        ),
-        body: TabBarView(
-          children: [
-            TransactionList(),
-            Chart(),
-          ],
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),

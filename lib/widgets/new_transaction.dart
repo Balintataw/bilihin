@@ -1,6 +1,7 @@
 import 'package:expenseTracker/models/app_state.dart';
 import 'package:expenseTracker/models/transaction.dart';
 import 'package:expenseTracker/redux/actions/actions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:redux/redux.dart';
@@ -63,52 +64,59 @@ class _NewTransactionState extends State<NewTransaction> {
       appBar: AppBar(
         title: Text("New Expense"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(labelText: 'Name'),
-              // onChanged: (value) => titleInput = value,
-              controller: _titleController,
-              onSubmitted: (_) => _onSubmit()
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
-              // onChanged: (value) => amountInput = value,
-              controller: _amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _onSubmit()
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(_selectedDate == null ? 
-                      'No Date Chosen' :
-                      'Picked Date: ${DateFormat.yMd().format(_selectedDate)}'
-                    ),
-                  ),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColorDark,
-                    child: Text(
-                      'Choose Date',
-                      style: TextStyle(fontWeight: FontWeight.bold)
-                    ),
-                    onPressed: _presentDatePicker, 
-                  )
-                ],
+      body: SingleChildScrollView(
+              child: Container(
+          padding: EdgeInsets.only(
+            top: 8, 
+            left: 8, 
+            right: 8,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 8
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: 'Name'),
+                // onChanged: (value) => titleInput = value,
+                controller: _titleController,
+                onSubmitted: (_) => _onSubmit()
               ),
-            ),
-            RaisedButton(
-              onPressed: _onSubmit,
-              child: Text('Add'),
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).textTheme.button.color,
-            )
-          ],
+              TextField(
+                decoration: InputDecoration(labelText: 'Amount'),
+                // onChanged: (value) => amountInput = value,
+                controller: _amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _onSubmit()
+              ),
+              Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(_selectedDate == null ? 
+                        'No Date Chosen' :
+                        'Picked Date: ${DateFormat.yMd().format(_selectedDate)}'
+                      ),
+                    ),
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColorLight,
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(fontWeight: FontWeight.bold)
+                      ),
+                      onPressed: _presentDatePicker, 
+                    )
+                  ],
+                ),
+              ),
+              RaisedButton(
+                onPressed: _onSubmit,
+                child: Text('Add'),
+                color: Theme.of(context).accentColor,
+                textColor: Theme.of(context).textTheme.button.color,
+              )
+            ],
+          ),
         ),
       )
     );

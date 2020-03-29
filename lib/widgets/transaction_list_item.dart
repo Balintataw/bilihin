@@ -19,6 +19,7 @@ class TransactionListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       elevation: 3,
@@ -53,15 +54,24 @@ class TransactionListItem extends StatelessWidget {
             );
           }, 
           builder: (context, viewModel) {
-            return IconButton(
-              icon: Icon(
-                Icons.delete,
-                color: Theme.of(context).errorColor,
-              ), 
-              onPressed: () {
-                viewModel.onItemSelected(tx.id);
-              }
-            );
+            return mediaQuery.size.width > 380 
+              ? FlatButton.icon(
+                onPressed: () {
+                  viewModel.onItemSelected(tx.id);
+                },
+                icon: Icon(Icons.delete), 
+                textColor: Theme.of(context).errorColor,
+                label: Text('Delete')
+              ) 
+              : IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: Theme.of(context).errorColor,
+                ), 
+                onPressed: () {
+                  viewModel.onItemSelected(tx.id);
+                }
+              );
           }
         ),
       ),

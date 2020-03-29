@@ -53,15 +53,14 @@ class App extends StatelessWidget {
             accentColor: Colors.redAccent,
             brightness: store.state.theme ? Brightness.dark : Brightness.light,
             fontFamily: 'Quicksand',
-            textTheme: TextTheme().apply(fontFamily: 'OpenSans'),
-            // ThemeData. .textTheme.copyWith(
-            //   headline6: TextStyle(
-            //     fontFamily: 'OpenSans',
-            //     fontWeight: FontWeight.bold,
-            //     fontSize: 16
-            //   ),
-            //   button: TextStyle(color: Colors.white)
-            // ),
+            textTheme: TextTheme().copyWith(
+              headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 16
+              ),
+              button: TextStyle(color: Colors.white)
+            ),
             appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
                 headline6: TextStyle(

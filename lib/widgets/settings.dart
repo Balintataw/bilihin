@@ -40,12 +40,6 @@ class _SettingsState extends State<Settings> {
               padding: EdgeInsets.all(10),
               child: Column(
                 children: <Widget>[
-                  Text(
-                    'Settings Page',
-                    style: TextStyle(
-                      fontSize: 20
-                    ),
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -55,7 +49,7 @@ class _SettingsState extends State<Settings> {
                           fontSize: 18
                         ),
                       ),
-                      Switch(
+                      Switch.adaptive(
                         activeColor: Theme.of(context).accentColor,
                         onChanged: (val) => viewModel.onToggleTheme(val), 
                         value: viewModel.currentTheme
