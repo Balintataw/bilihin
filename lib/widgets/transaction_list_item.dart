@@ -1,6 +1,6 @@
 import 'package:expenseTracker/models/app_state.dart';
 import 'package:expenseTracker/models/transaction.dart';
-import 'package:expenseTracker/redux/actions/actions.dart';
+import 'package:expenseTracker/redux/actions/transaction_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl/intl.dart';

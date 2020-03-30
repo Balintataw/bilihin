@@ -1,3 +1,4 @@
+import 'package:expenseTracker/redux/actions/transaction_actions.dart';
 import 'package:expenseTracker/selectors/selectors.dart';
 import 'package:expenseTracker/widgets/settings.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:expenseTracker/widgets/transaction_list.dart';
 
 class HomePage extends StatefulWidget {
   final Store<AppState> store;
-  // final void Function() onInit;
+  // final void Function(Store<AppState> store) onInit;
 
   HomePage({this.store});
   // HomePage({this.store, this.onInit});
@@ -20,11 +21,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   widget.onInit();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    widget.store.dispatch(loadTransactions);
+  }
 
   void _showNewTransactionModal (context, store) {
     Navigator.push(

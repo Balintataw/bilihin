@@ -3,7 +3,6 @@ import 'package:expenseTracker/widgets/transaction_list_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:expenseTracker/models/app_state.dart';
-import 'package:expenseTracker/widgets/transaction_list_item.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class TransactionList extends StatelessWidget {

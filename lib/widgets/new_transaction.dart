@@ -1,6 +1,6 @@
 import 'package:expenseTracker/models/app_state.dart';
 import 'package:expenseTracker/models/transaction.dart';
-import 'package:expenseTracker/redux/actions/actions.dart';
+import 'package:expenseTracker/redux/actions/transaction_actions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +35,8 @@ class _NewTransactionState extends State<NewTransaction> {
       id: DateTime.now().toString()
     );
     print(newTx);
-    widget.store.dispatch(AddTransactionAction(newTx));
+    // widget.store.dispatch(AddTransactionAction(newTx));
+    widget.store.dispatch(addTransaction(newTx));
     // setState(() {
     //   _transactions.add(newTx);
     // });

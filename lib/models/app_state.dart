@@ -14,11 +14,11 @@ class AppState {
   });
 
   factory AppState.initial() {
-    var transactions = [
-      Transaction(
-          id: '1', title: 'New Koshka', amount: 99.99, date: DateTime.now()),
-      Transaction(
-          id: '2', title: 'New Tuta', amount: 16.99, date: DateTime.now().subtract(Duration(days: 1))),
+    List<Transaction> transactions = [
+      // Transaction(
+      //     id: '1', title: 'New Koshka', amount: 99.99, date: DateTime.now()),
+      // Transaction(
+      //     id: '2', title: 'New Tuta', amount: 16.99, date: DateTime.now().subtract(Duration(days: 1))),
     ];
     return AppState(isLoading: true, theme: false, transactions: transactions);
   }
