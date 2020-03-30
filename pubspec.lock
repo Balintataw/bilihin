@@ -37,7 +37,7 @@ packages:
     source: hosted
     version: "1.1.2"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       url: "https://pub.dartlang.org"
@@ -203,6 +203,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.3"
+  sticky_headers:
+    dependency: "direct main"
+    description:
+      name: sticky_headers
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.8+1"
   stream_channel:
     dependency: transitive
     description:

@@ -29,6 +29,8 @@ dependencies:
   redux_thunk: ^0.3.0
   flutter_redux: ^0.6.0
   shared_preferences: ^0.5.6+3
+  collection: ^1.14.11
+  sticky_headers: ^0.1.8+1
 
 dev_dependencies:
   flutter_test:

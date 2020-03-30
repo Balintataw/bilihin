@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:expenseTracker/models/app_state.dart';
 import 'package:expenseTracker/models/transaction.dart';
 import 'package:intl/intl.dart';
@@ -39,4 +40,18 @@ double totalWeekSpending(AppState state) {
   return groupedTransactionValues(state).fold(0.0, (previousValue, tx) {
     return previousValue += tx['amount'];
   });
+}
+
+List<Map<String, Object>> groupedByDateTransactionValues(AppState state) {
+    var newMap = groupBy(
+      state.transactions, 
+      (Transaction obj) => DateFormat.yMMMd().format(obj.date)
+    );
+    List<Map<String, Object>> result = newMap.keys.map((key) { 
+      return {
+        key: newMap[key]
+      };
+    }).toList();
+    // .sort((a, b) => a.keys.elementAt(0).compareTo(b.keys.elementAt(0)));
+    return result;
 }
