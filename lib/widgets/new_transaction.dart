@@ -32,7 +32,6 @@ class _NewTransactionState extends State<NewTransaction> {
   }
 
   onChangeDropdownItem(CategoryType selectedType) {
-    print('S ${selectedType.name}');
     setState(() {
       _selectedExpenseType = selectedType;
     });
@@ -44,7 +43,6 @@ class _NewTransactionState extends State<NewTransaction> {
 
     if(title.isEmpty || amount <= 0 || _selectedDate == null) return;
 
-    print(_selectedExpenseType.name);
     final newTx = Transaction(
       title: title,
       amount: amount,

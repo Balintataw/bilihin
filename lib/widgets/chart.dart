@@ -14,6 +14,8 @@ class Chart extends StatelessWidget {
       converter: (store) => store.state,
       builder: (context, state) {
         return LayoutBuilder(builder: (ctx, constraints) {
+        final cardHeight = MediaQuery.of(context).orientation == Orientation.portrait ? constraints.maxHeight * 0.4 : constraints.maxHeight * 0.7;
+
           return SingleChildScrollView(
             child: Column(
               children: [ 
@@ -32,7 +34,7 @@ class Chart extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        height: constraints.maxHeight * 0.4,
+                        height: cardHeight,
                         padding: EdgeInsets.all(10),
                         child: SimplePieChart.withMonthData(state)
                       ),
@@ -72,7 +74,7 @@ class Chart extends StatelessWidget {
                   elevation: 5,
                   margin: EdgeInsets.all(8),
                   child: Container(
-                    height: constraints.maxHeight * 0.4,
+                    height: cardHeight,
                     padding: EdgeInsets.all(10),
                     child: SimpleBarChart.withWeekData(state)
                   ),
@@ -90,7 +92,7 @@ class Chart extends StatelessWidget {
                   elevation: 5,
                   margin: EdgeInsets.all(8),
                   child: Container(
-                    height: constraints.maxHeight * 0.4,
+                    height: cardHeight,
                     padding: EdgeInsets.all(10),
                     child: SimpleBarChart.withMonthData(state)
                   ),

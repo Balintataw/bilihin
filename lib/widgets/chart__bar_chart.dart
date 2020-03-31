@@ -78,7 +78,6 @@ class SimpleBarChart extends StatelessWidget {
 
   static List<charts.Series<BarChartData, String>> _createMonthData(AppState state) {
     final data = transactionValuesByMonth(state);
-    print(data.toString());
 
     return [
       new charts.Series<BarChartData, String>(
