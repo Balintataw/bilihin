@@ -50,7 +50,7 @@ class TransactionListItem extends StatelessWidget {
             final transaction = tx;
             return _ViewModel(
               transaction,
-              (id) => store.dispatch(DeleteTransactionAction(id))
+              (id) => store.dispatch(deleteTransaction(id))
             );
           }, 
           builder: (context, viewModel) {

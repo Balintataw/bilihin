@@ -1,10 +1,13 @@
 import 'package:expenseTracker/models/app_state.dart';
+import 'package:expenseTracker/models/expense_type.dart';
 import 'package:expenseTracker/models/transaction.dart';
 import 'package:expenseTracker/redux/actions/transaction_actions.dart';
+import 'package:expenseTracker/widgets/category_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:redux/redux.dart';
+
 
 class NewTransaction extends StatefulWidget {
   final Function onAddNewTransaction;
@@ -20,6 +23,20 @@ class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController(text: '0.0');
   DateTime _selectedDate;
+  ExpenseType _selectedExpenseType;
+  
+  @override
+  initState() {
+    // _selectedExpenseType = 
+    // _selectedExpenseType = _dropdownMenuItems[0].value;
+  }
+
+  onChangeDropdownItem(ExpenseType selectedType) {
+    print('S ${selectedType.name}');
+    setState(() {
+      _selectedExpenseType = selectedType;
+    });
+  }
 
   void _onSubmit() {
     final title = _titleController.text;
@@ -27,20 +44,15 @@ class _NewTransactionState extends State<NewTransaction> {
 
     if(title.isEmpty || amount <= 0 || _selectedDate == null) return;
 
-  // void _addNewTransaction(String title, double amount, DateTime date) {
+    print(_selectedExpenseType.name);
     final newTx = Transaction(
       title: title,
       amount: amount,
       date: _selectedDate,
       id: DateTime.now().toString()
     );
-    print(newTx);
-    // widget.store.dispatch(AddTransactionAction(newTx));
+
     widget.store.dispatch(addTransaction(newTx));
-    // setState(() {
-    //   _transactions.add(newTx);
-    // });
-    // widget.onAddNewTransaction(title, amount, _selectedDate);
 
     Navigator.pop(context);
   }
@@ -66,7 +78,7 @@ class _NewTransactionState extends State<NewTransaction> {
         title: Text("New Expense"),
       ),
       body: SingleChildScrollView(
-              child: Container(
+        child: Container(
           padding: EdgeInsets.only(
             top: 8, 
             left: 8, 
@@ -78,16 +90,21 @@ class _NewTransactionState extends State<NewTransaction> {
             children: <Widget>[
               TextField(
                 decoration: InputDecoration(labelText: 'Name'),
-                // onChanged: (value) => titleInput = value,
                 controller: _titleController,
                 onSubmitted: (_) => _onSubmit()
               ),
               TextField(
                 decoration: InputDecoration(labelText: 'Amount'),
-                // onChanged: (value) => amountInput = value,
                 controller: _amountController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 onSubmitted: (_) => _onSubmit()
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: CategoryDropdown(
+                  onSelect: onChangeDropdownItem,
+                  selectedItem: _selectedExpenseType
+                )
               ),
               Container(
                 height: 70,
@@ -122,56 +139,4 @@ class _NewTransactionState extends State<NewTransaction> {
       )
     );
   }
-    // return Card(
-    //   // elevation: 5,
-    //   child: Container(
-    //     padding: EdgeInsets.all(8),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.end,
-    //       children: <Widget>[
-    //         TextField(
-    //           decoration: InputDecoration(labelText: 'Name'),
-    //           // onChanged: (value) => titleInput = value,
-    //           controller: _titleController,
-    //           onSubmitted: (_) => _onSubmit()
-    //         ),
-    //         TextField(
-    //           decoration: InputDecoration(labelText: 'Amount'),
-    //           // onChanged: (value) => amountInput = value,
-    //           controller: _amountController,
-    //           keyboardType: TextInputType.numberWithOptions(decimal: true),
-    //           onSubmitted: (_) => _onSubmit()
-    //         ),
-    //         Container(
-    //           height: 70,
-    //           child: Row(
-    //             children: <Widget>[
-    //               Expanded(
-    //                 child: Text(_selectedDate == null ? 
-    //                   'No Date Chosen' :
-    //                   'Picked Date: ${DateFormat.yMd().format(_selectedDate)}'
-    //                 ),
-    //               ),
-    //               FlatButton(
-    //                 textColor: Theme.of(context).primaryColorDark,
-    //                 child: Text(
-    //                   'Choose Date',
-    //                   style: TextStyle(fontWeight: FontWeight.bold)
-    //                 ),
-    //                 onPressed: _presentDatePicker, 
-    //               )
-    //             ],
-    //           ),
-    //         ),
-    //         RaisedButton(
-    //           onPressed: _onSubmit,
-    //           child: Text('Add'),
-    //           color: Theme.of(context).primaryColor,
-    //           textColor: Theme.of(context).textTheme.button.color,
-    //         )
-    //       ],
-    //     ),
-    //   )
-    // );
-  // }
 }
