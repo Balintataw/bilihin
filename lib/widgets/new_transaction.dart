@@ -1,5 +1,5 @@
 import 'package:expenseTracker/models/app_state.dart';
-import 'package:expenseTracker/models/expense_type.dart';
+import 'package:expenseTracker/models/category_type.dart';
 import 'package:expenseTracker/models/transaction.dart';
 import 'package:expenseTracker/redux/actions/transaction_actions.dart';
 import 'package:expenseTracker/widgets/category_dropdown.dart';
@@ -23,7 +23,7 @@ class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController(text: '0.0');
   DateTime _selectedDate;
-  ExpenseType _selectedExpenseType;
+  CategoryType _selectedExpenseType;
   
   @override
   initState() {
@@ -31,7 +31,7 @@ class _NewTransactionState extends State<NewTransaction> {
     // _selectedExpenseType = _dropdownMenuItems[0].value;
   }
 
-  onChangeDropdownItem(ExpenseType selectedType) {
+  onChangeDropdownItem(CategoryType selectedType) {
     print('S ${selectedType.name}');
     setState(() {
       _selectedExpenseType = selectedType;
@@ -49,7 +49,8 @@ class _NewTransactionState extends State<NewTransaction> {
       title: title,
       amount: amount,
       date: _selectedDate,
-      id: DateTime.now().toString()
+      id: DateTime.now().toString(),
+      category: _selectedExpenseType.name
     );
 
     widget.store.dispatch(addTransaction(newTx));

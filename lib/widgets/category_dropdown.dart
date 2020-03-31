@@ -1,9 +1,9 @@
-import 'package:expenseTracker/models/expense_type.dart';
 import 'package:flutter/material.dart';
+import 'package:expenseTracker/models/category_type.dart';
 
 class CategoryDropdown extends StatefulWidget {
   final Function onSelect;
-  final ExpenseType selectedItem;
+  final CategoryType selectedItem;
 
   CategoryDropdown({this.onSelect, this.selectedItem});
 
@@ -12,20 +12,20 @@ class CategoryDropdown extends StatefulWidget {
 }
 
 class _CategoryDropdownState extends State<CategoryDropdown> {
-  List<ExpenseType> _expenseTypes = ExpenseType.getTypes();
-  List<DropdownMenuItem<ExpenseType>> _dropdownMenuItems;
-  ExpenseType _selectedExpenseType;
+  List<CategoryType> _expenseTypes = CategoryType.getTypes();
+  List<DropdownMenuItem<CategoryType>> _dropdownMenuItems;
+  CategoryType _selectedCategoryType;
 
   @override
   void initState() {
     _dropdownMenuItems = buildDropdownMenuItems(_expenseTypes);
-    _selectedExpenseType = _dropdownMenuItems[0].value;
+    _selectedCategoryType = _dropdownMenuItems[0].value;
     super.initState();
   }
 
-  List<DropdownMenuItem<ExpenseType>> buildDropdownMenuItems(expenseTypes) {
-    List<DropdownMenuItem<ExpenseType>> items = List();
-    for(ExpenseType ex in expenseTypes) {
+  List<DropdownMenuItem<CategoryType>> buildDropdownMenuItems(expenseTypes) {
+    List<DropdownMenuItem<CategoryType>> items = List();
+    for(CategoryType ex in expenseTypes) {
       items.add(DropdownMenuItem(value: ex, child: Text(ex.name)));
     }
     return items;
@@ -33,7 +33,7 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
 
   handleDropdownMenuItemChange(item) {
     // setState(() {
-    //   _selectedExpenseType = item;
+    //   _selectedCategoryType = item;
     // });
     widget.onSelect(item);
   }
