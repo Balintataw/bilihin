@@ -1,16 +1,18 @@
+import 'package:flutter/material.dart';
+
 class CategoryType {
   String name;
-  String color;
+  Color color;
 
   CategoryType(this.name, this.color);
 
   static List<CategoryType> getTypes() {
     return <CategoryType>[
-      CategoryType('Food', 'red'),
-      CategoryType('Clothing', 'blue'),
-      CategoryType('Entertainment', 'green'),
-      CategoryType('Utilities', 'orange'),
-      CategoryType('Other', 'purple'),
+      CategoryType('food', Colors.red),
+      CategoryType('clothing', Colors.blue),
+      CategoryType('entertainment', Colors.green),
+      CategoryType('utilities', Colors.deepOrange),
+      CategoryType('other', Colors.purple),
     ];
   }
 }

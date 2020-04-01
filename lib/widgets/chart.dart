@@ -1,11 +1,10 @@
-import 'package:expenseTracker/models/app_colors.dart';
-import 'package:expenseTracker/models/category_type.dart';
-import 'package:expenseTracker/widgets/chart__pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:expenseTracker/models/app_state.dart';
-import 'package:expenseTracker/selectors/selectors.dart';
+import 'package:expenseTracker/models/category_type.dart';
+import 'package:expenseTracker/widgets/chart__pie_chart.dart';
 import 'package:expenseTracker/widgets/chart__bar_chart.dart';
+import 'package:expenseTracker/selectors/selectors.dart';
 
 class Chart extends StatelessWidget {
   @override
@@ -31,34 +30,33 @@ class Chart extends StatelessWidget {
                 Card(
                   elevation: 5,
                   margin: EdgeInsets.all(8),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: cardHeight,
-                        padding: EdgeInsets.all(10),
-                        child: SimplePieChart.withMonthData(state)
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        child: Row(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: cardHeight,
+                          child: SimplePieChart.withMonthData(state)
+                        ),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: CategoryType.getTypes().map((e) {
-                              return Row(
-                                children: <Widget>[
-                                  Text(e.name),
-                                  Text(
-                                    '\u2022', 
-                                    style: TextStyle(
-                                      color: AppColors.find(e.color),
-                                      fontSize: 30
-                                    )
-                                  ),
-                                ],
-                              );
-                            }).toList()
-                        )
-                      ),
-                    ],
+                            return Row(
+                              children: <Widget>[
+                                Text(e.name),
+                                Text(
+                                  '\u2022', 
+                                  style: TextStyle(
+                                    color: e.color,
+                                    fontSize: 30
+                                  )
+                                ),
+                              ],
+                            );
+                          }).toList()
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(

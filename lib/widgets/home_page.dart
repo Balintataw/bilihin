@@ -1,5 +1,4 @@
 import 'package:expenseTracker/redux/actions/transaction_actions.dart';
-import 'package:expenseTracker/selectors/selectors.dart';
 import 'package:expenseTracker/widgets/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
@@ -11,10 +10,8 @@ import 'package:expenseTracker/widgets/transaction_list.dart';
 
 class HomePage extends StatefulWidget {
   final Store<AppState> store;
-  // final void Function(Store<AppState> store) onInit;
 
   HomePage({this.store});
-  // HomePage({this.store, this.onInit});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -44,7 +41,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
-    // final isIos = Platform.isIOS;
     final appBar = AppBar(
       title: Text('Bilihin'),
       actions: <Widget>[

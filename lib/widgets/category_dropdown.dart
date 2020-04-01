@@ -14,12 +14,10 @@ class CategoryDropdown extends StatefulWidget {
 class _CategoryDropdownState extends State<CategoryDropdown> {
   List<CategoryType> _expenseTypes = CategoryType.getTypes();
   List<DropdownMenuItem<CategoryType>> _dropdownMenuItems;
-  CategoryType _selectedCategoryType;
 
   @override
   void initState() {
     _dropdownMenuItems = buildDropdownMenuItems(_expenseTypes);
-    _selectedCategoryType = _dropdownMenuItems[0].value;
     super.initState();
   }
 
@@ -32,9 +30,6 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
   }
 
   handleDropdownMenuItemChange(item) {
-    // setState(() {
-    //   _selectedCategoryType = item;
-    // });
     widget.onSelect(item);
   }
     

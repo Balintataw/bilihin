@@ -32,24 +32,40 @@ class SimpleBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lineColor = charts.MaterialPalette.white;
+
     return new charts.BarChart(
       seriesList,
       animate: animate,
-      /// Assign a custom style for the measure axis.
-      ///
-      /// The NoneRenderSpec can still draw an axis line with
-      /// showAxisLine=true.
-      // primaryMeasureAxis:
-      //     new charts.NumericAxisSpec(renderSpec: new charts.NoneRenderSpec()),
+      primaryMeasureAxis: new charts.NumericAxisSpec(
+        renderSpec: new charts.GridlineRendererSpec(
+            // Tick and Label styling here.
+          labelStyle: new charts.TextStyleSpec(
+            fontSize: 18, // size in Pts.
+            color: lineColor
+          ),
 
-      /// This is an OrdinalAxisSpec to match up with BarChart's default
-      /// ordinal domain axis (use NumericAxisSpec or DateTimeAxisSpec for
-      /// other charts).
+          // Change the line colors to match text color.
+          lineStyle: new charts.LineStyleSpec(
+            color: lineColor
+          )
+        )
+      ),
       domainAxis: new charts.OrdinalAxisSpec(
         // Make sure that we draw the domain axis line.
         showAxisLine: true,
-        // But don't draw anything else.
-        renderSpec: !showBaseline ? new charts.NoneRenderSpec() : null
+        // But draw axis based on showBaseline flag.
+        renderSpec: !showBaseline ? new charts.NoneRenderSpec() : new charts.SmallTickRendererSpec(
+            // Tick and Label styling here.
+          labelStyle: new charts.TextStyleSpec(
+            fontSize: 18,
+            color: lineColor
+          ),
+          // Change the line colors to match text color.
+          lineStyle: new charts.LineStyleSpec(
+            color: lineColor
+          )
+        ),
       ),
       // With a spark chart we likely don't want large chart margins.
       // 1px is the smallest we can make each margin.
@@ -59,7 +75,6 @@ class SimpleBarChart extends StatelessWidget {
       //     rightMarginSpec: new charts.MarginSpec.fixedPixel(0),
       //     bottomMarginSpec: new charts.MarginSpec.fixedPixel(0)),
     );
-    // );
   }
 
   static List<charts.Series<BarChartData, String>> _createWeekData(AppState state) {

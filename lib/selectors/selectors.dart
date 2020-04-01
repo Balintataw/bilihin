@@ -78,7 +78,7 @@ List<BarChartData> transactionCategoriesByMonth(AppState state) {
     result.add(BarChartData(
       _categories[i].name,
       totalCategoryExpenditure,
-      color: i.toString()
+      color: BarChartData.colorFromCategory(_categories[i].name)
     ));
   }
   return result;

@@ -21,15 +21,15 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
-  final _amountController = TextEditingController(text: '0.0');
+  final _amountController = TextEditingController();
   DateTime _selectedDate;
   CategoryType _selectedExpenseType;
   
-  @override
-  initState() {
-    // _selectedExpenseType = 
-    // _selectedExpenseType = _dropdownMenuItems[0].value;
-  }
+  // @override
+  // initState() {
+  //   // _selectedExpenseType = 
+  //   // _selectedExpenseType = _dropdownMenuItems[0].value;
+  // }
 
   onChangeDropdownItem(CategoryType selectedType) {
     setState(() {
@@ -39,9 +39,9 @@ class _NewTransactionState extends State<NewTransaction> {
 
   void _onSubmit() {
     final title = _titleController.text;
-    final amount = double.parse(_amountController.text);
+    final amount = double.tryParse(_amountController.text);
 
-    if(title.isEmpty || amount <= 0 || _selectedDate == null) return;
+    if(title.isEmpty || amount == null || _selectedDate == null) return;
 
     final newTx = Transaction(
       title: title,
