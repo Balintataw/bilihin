@@ -14,14 +14,15 @@ class _ViewModel {
 
 class TransactionListItem extends StatelessWidget {
   final Transaction tx;
+  final Key key;
 
-  TransactionListItem({this.tx});
+  TransactionListItem({@required this.key, @required this.tx}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       elevation: 3,
       child: ListTile(
         leading: CircleAvatar(
@@ -59,7 +60,7 @@ class TransactionListItem extends StatelessWidget {
                 onPressed: () {
                   viewModel.onItemSelected(tx.id);
                 },
-                icon: Icon(Icons.delete), 
+                icon: const Icon(Icons.delete), 
                 textColor: Theme.of(context).errorColor,
                 label: Text('Delete')
               ) 

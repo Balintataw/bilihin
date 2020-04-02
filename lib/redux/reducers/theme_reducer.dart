@@ -2,9 +2,9 @@ import 'package:expenseTracker/redux/actions/theme_actions.dart';
 import 'package:redux/redux.dart';
 
 final themeReducer = combineReducers<bool>([
-  TypedReducer<bool, ToggleApplicationTheme>(_toggleTheme),
+  TypedReducer<bool, ToggleThemeAction>(_setTheme),
 ]);
 
-bool _toggleTheme(bool state, action) {
-  return !state;
+bool _setTheme(bool state, action) {
+  return action.theme;
 }

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class TransactionListGroup extends StatelessWidget {
   final List<Transaction> transactionGroup;
+  final Key key;
 
-  TransactionListGroup({this.transactionGroup});
+  TransactionListGroup({@required this.key, @required this.transactionGroup}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class TransactionListGroup extends StatelessWidget {
       shrinkWrap: true,
       itemCount: transactionGroup.length,
       itemBuilder: (BuildContext ctx, int index) {
-        return TransactionListItem(tx: transactionGroup[index]);
+        return TransactionListItem(key: ValueKey(index.toString() + 'list_item'), tx: transactionGroup[index]);
       }
     );
   }

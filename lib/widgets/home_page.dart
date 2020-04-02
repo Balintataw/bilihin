@@ -42,18 +42,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     final appBar = AppBar(
-      title: Text('Bilihin'),
+      title: const Text('Bilihin'),
       actions: <Widget>[
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.settings
           ), 
           onPressed: () => _showSettingsModal(context, widget.store))
       ],
       bottom: TabBar(
         tabs: [
-          Tab(icon: Icon(Icons.home)),
-          Tab(icon: Icon(Icons.insert_chart)),
+          const Tab(icon: const Icon(Icons.home)),
+          const Tab(icon: const Icon(Icons.insert_chart)),
         ],
       ),
     );
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () => _showNewTransactionModal(context, widget.store),
         ),
         floatingActionButtonLocation: isLandscape ? FloatingActionButtonLocation.endFloat : FloatingActionButtonLocation.centerFloat,

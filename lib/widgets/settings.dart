@@ -29,15 +29,15 @@ class _SettingsState extends State<Settings> {
       ),
       body: StoreConnector<AppState, _ViewModel>(
           converter: (store) {
-              final currentTheme = store.state.theme;
+            final currentTheme = store.state.theme;
             return _ViewModel(
-              (value) => store.dispatch(ToggleApplicationTheme(value: value)),
+              (value) => store.dispatch(toggleTheme(store)),
               currentTheme,
             );
           }, 
           builder: (context, viewModel) {
             return Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: <Widget>[
                   Row(

@@ -8,8 +8,9 @@ class SimpleBarChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
   final bool showBaseline;
+  final AppState state;
 
-  SimpleBarChart(this.seriesList, {this.animate, this.showBaseline});
+  SimpleBarChart(this.seriesList, {this.animate, this.showBaseline, this.state});
 
   /// Creates the 7 day chart.
   factory SimpleBarChart.withWeekData(AppState state) {
@@ -17,6 +18,7 @@ class SimpleBarChart extends StatelessWidget {
       _createWeekData(state),
       animate: true,
       showBaseline: true,
+      state: state,
     );
   }
 
@@ -26,13 +28,14 @@ class SimpleBarChart extends StatelessWidget {
       _createMonthData(state),
       animate: true,
       showBaseline: false,
+      state: state,
     );
   }
 
 
   @override
   Widget build(BuildContext context) {
-    final lineColor = charts.MaterialPalette.white;
+    final lineColor = state.theme ? charts.MaterialPalette.white : charts.MaterialPalette.black;
 
     return new charts.BarChart(
       seriesList,

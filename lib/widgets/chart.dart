@@ -20,7 +20,7 @@ class Chart extends StatelessWidget {
               children: [ 
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
+                  child: const Text(
                     'Spending by Category',
                     style: TextStyle(
                       fontSize: 20,
@@ -29,7 +29,7 @@ class Chart extends StatelessWidget {
                 ),
                 Card(
                   elevation: 5,
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -70,10 +70,10 @@ class Chart extends StatelessWidget {
                 ),
                 Card(
                   elevation: 5,
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Container(
                     height: cardHeight,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: SimpleBarChart.withWeekData(state)
                   ),
                 ),
@@ -88,10 +88,10 @@ class Chart extends StatelessWidget {
                 ),
                 Card(
                   elevation: 5,
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Container(
                     height: cardHeight,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: SimpleBarChart.withMonthData(state)
                   ),
                 ),

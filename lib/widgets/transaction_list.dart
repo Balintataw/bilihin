@@ -36,7 +36,7 @@ class TransactionList extends StatelessWidget {
           }
         )
         : ListView.builder(
-          shrinkWrap: true,
+            shrinkWrap: true,
             itemCount: list.length,
             itemBuilder: (BuildContext ctx, int index) {
               return StickyHeader(
@@ -44,12 +44,15 @@ class TransactionList extends StatelessWidget {
                 header: Container(
                   height: 30.0,
                   color: Theme.of(context).scaffoldBackgroundColor,
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   alignment: Alignment.center,
                   child: Text(list[index].keys.elementAt(0)), 
                 ),
                 content: Container(
-                  child: TransactionListGroup(transactionGroup: list[index].values.elementAt(0))
+                  child: TransactionListGroup(
+                    key: ValueKey(index.toString() + 'list_group'), 
+                    transactionGroup: list[index].values.elementAt(0)
+                  )
                 )
               );
             }

@@ -40,7 +40,7 @@ class _CategoryDropdownState extends State<CategoryDropdown> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Category'),
+          const Text('Category'),
           DropdownButton(
             isExpanded: true,
             items: _dropdownMenuItems, 

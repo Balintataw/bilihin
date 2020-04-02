@@ -17,7 +17,6 @@ class BarChartData {
   BarChartData(this.day, this.amount, {this.category, this.color});
 
   static colorFromCategory(String category) {
-    print('Category $category');
     switch (category) {
       case 'food':
         {
