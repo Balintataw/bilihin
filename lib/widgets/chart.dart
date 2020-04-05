@@ -40,14 +40,14 @@ class Chart extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: CategoryType.getTypes().map((e) {
+                          children: CategoryType.getTypes().map((type) {
                             return Row(
                               children: <Widget>[
-                                Text(e.name),
+                                Text(type.name),
                                 Text(
                                   '\u2022', 
                                   style: TextStyle(
-                                    color: e.color,
+                                    color: type.color,
                                     fontSize: 30
                                   )
                                 ),
@@ -63,7 +63,7 @@ class Chart extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
                     'Last 7 days: \$${totalSpendingByPeriod(state, 7).toStringAsFixed(2)}', 
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
                   ),
@@ -81,7 +81,7 @@ class Chart extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
                     'Last 30 days: \$${totalSpendingByPeriod(state, 30).toStringAsFixed(2)}', 
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
                   ),
@@ -95,7 +95,7 @@ class Chart extends StatelessWidget {
                     child: SimpleBarChart.withMonthData(state)
                   ),
                 ),
-                SizedBox(height: 80)
+                const SizedBox(height: 80)
               ],
             ),
           );

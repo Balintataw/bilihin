@@ -7,19 +7,36 @@ import 'package:expenseTracker/selectors/selectors.dart';
 class SimplePieChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
+  final bool isEmpty;
 
-  SimplePieChart(this.seriesList, {this.animate});
+  SimplePieChart(this.seriesList, {this.animate, this.isEmpty});
 
   factory SimplePieChart.withMonthData(AppState state) {
     return SimplePieChart(
       _createMonthData(state),
       animate: true,
+      isEmpty: _isEmpty(state)
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return new charts.PieChart(seriesList, animate: animate);
+    if(isEmpty) {
+      return Center(child: Container(child: Text('No expenses yet'),));
+    } else {
+      return charts.PieChart(seriesList, animate: animate);
+    }
+  }
+
+  static bool _isEmpty(AppState state) {
+    final data = transactionCategoriesByMonth(state);
+    double total = data.fold(0, (previousValue, element) {
+      return previousValue += element.amount;
+    });
+    if(total <= 0.0) {
+      return true;
+    }
+    return false;
   }
 
   static List<charts.Series<BarChartData, String>> _createMonthData(AppState state) {
@@ -29,8 +46,6 @@ class SimplePieChart extends StatelessWidget {
       new charts.Series<BarChartData, String>(
         id: 'Category Month',
         colorFn: (BarChartData transaction, __) => transaction.color,
-        // colorFn: (BarChartData transaction, __) => BarChartData.colorFromCategory(transaction.category),
-        // colorFn: (BarChartData transaction, _) => charts.MaterialPalette.green.shadeDefault,
         domainFn: (BarChartData transaction, _) => transaction.day,
         measureFn: (BarChartData transaction, _) => transaction.amount,
         data: data,
