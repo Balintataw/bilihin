@@ -11,6 +11,10 @@ const String _TRANSACTIONS = 'transactions';
 ThunkAction<AppState> loadTransactions = (Store<AppState> store) async {
   final prefs = await SharedPreferences.getInstance();
   final String storedTransactions = prefs.getString(_TRANSACTIONS);
+  if(storedTransactions == null) {
+    store.dispatch(SetTransactionsAction([]));
+    return;
+  }
 
   final jsonResponse = json.decode(storedTransactions) as List;
   final List<Transaction> transactions = jsonResponse != null 

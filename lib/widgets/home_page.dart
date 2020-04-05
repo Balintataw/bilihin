@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => _showSettingsModal(context, widget.store))
       ],
       bottom: TabBar(
-        tabs: [
+        tabs: <Widget>[
           const Tab(icon: const Icon(Icons.home)),
           const Tab(icon: const Icon(Icons.insert_chart)),
         ],
